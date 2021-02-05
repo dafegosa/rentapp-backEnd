@@ -21,13 +21,14 @@ module.exports = {
       res.status(201).json({
         message: 'Usuario registrado exitosamente',
         token,
-        nickName: user.nickName,
+        user,
       })
     } catch (err) {
       res.status(400).json({ message: err.message })
     }
   },
   async signIn(req, res) {
+    console.log('El pepe', req.body)
     try {
       const { email, password } = req.body
       const user = await User.findOne({ email })
@@ -48,7 +49,7 @@ module.exports = {
           expiresIn: 60 * 60 * 24,
         }
       )
-      res.status(200).json({ token, nickName: user.nickName })
+      res.status(200).json({ token, user })
     } catch (err) {
       res.status(401).json({ message: 'Usuario o contraseña invalida' })
     }
