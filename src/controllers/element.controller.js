@@ -28,4 +28,15 @@ module.exports = {
       res.status(400).json({ message: 'Email not found', data: err })
     }
   },
+  async listElements(req, res) {
+    try {
+      const elements = await Element.find()
+      res.status(200).json({
+        message: 'Elements found',
+        data: elements,
+      })
+    } catch (err) {
+      res.status(400).json({ message: 'Email not found', data: err })
+    }
+  },
 }
