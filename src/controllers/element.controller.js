@@ -15,4 +15,17 @@ module.exports = {
       res.status(400).json({ message: err.message })
     }
   },
+
+  async listOwnElements(req, res) {
+    try {
+      const thisId = req.body.id
+      const elements = await Element.find({ owner: thisId })
+      res.status(200).json({
+        message: 'Elements found',
+        data: elements,
+      })
+    } catch (err) {
+      res.status(400).json({ message: 'Email not found', data: err })
+    }
+  },
 }
